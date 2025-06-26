@@ -96,6 +96,7 @@ However, there are times, during debugging, when it's useful to have a placehold
 ## Extensions
 
 * Why only constants? Why not permit positional *arithmetic* to reference parameters?
+* Why decimal syntax and not Roman numerals, for which we already have separate [support](https://github.com/shriram/roman-numerals)?
 * Why decimal syntax and not Church numerals? For instance, instead of writing `$0`, we could write `$(λ (f) (λ (x) x))`.
 * Heck, why not do this recursively? Use lambda-n to reference parameters: `$(λ 1 (λ 1 $0))`, for instance.
 * Naturally, then—do you see why?—we would need to extend this to de Bruijn notation.
