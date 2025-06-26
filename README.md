@@ -91,6 +91,15 @@ However, there are times, during debugging, when it's useful to have a placehold
 * Heck, why not do this recursively? Use lambda-n to reference parameters: `$(λ 1 (λ 1 $0))`, for instance.
 * Naturally, then—do you see why?—we would need to extend this to de Bruijn notation.
 
+## Best Alternate Names
+
+beka valentine on [Mastodon](https://mastodon.social/@beka_valentine@kolektiva.social/114748525078322647): 
+“bash.sh”
+
+Vaishnavi S on [Bluesky](https://bsky.app/profile/vaishs.bsky.social/post/3lsiqgv2m7222):
+“Maybe you should call it John McEnroe, since you’re adding a little
+bash to your racket”
+
 ## Bugs?
 
 Oh, I really don't want to know.
