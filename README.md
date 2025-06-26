@@ -50,6 +50,12 @@ See how nicely this relieves you the bother of deciding what to call the paramet
 
 Be sure to see [the test suite](client.rkt) for more glorious examples of the merits of getting rid of parameter names.
 
+## Is it *Ever* Useful?
+
+No, you should never use this! It's just meant to illustrate the power of Racket macros.
+
+However, there are times, during debugging, when it's useful to have a placeholder function that just “soaks up” its parameters, whose arity is determined by the context: e.g., in a `for-each` context, you need a one-parameter function. You could write, say, `(lambda (x) (void))`; or even `(lambda x (void))`; or you *could* use this feature there: e.g., `(lambda 1)`. But you shouldn't.
+
 ## Extensions
 
 * Why only constants? Why not permit positional *arithmetic* to reference parameters?
