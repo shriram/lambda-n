@@ -1,5 +1,14 @@
 # The lambda-n Language
 
+## Is This a Serious Language?
+
+My gosh, no. There's a giant imaginary `/s` around the whole
+thing. But someone always misunderstands these things (especially on
+social media), which is why I'm putting this at the top.
+
+Though it *is* a cute programming *exercise*, illustrating Racket
+macros.
+
 ## Motivation
 
 In [Bicameral, Not Homoiconic](https://parentheticallyspeaking.org/articles/bicameral-not-homoiconic/)
