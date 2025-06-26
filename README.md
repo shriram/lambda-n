@@ -50,6 +50,34 @@ See how nicely this relieves you the bother of deciding what to call the paramet
 
 Be sure to see [the test suite](client.rkt) for more glorious examples of the merits of getting rid of parameter names.
 
+## How Does It Work?
+
+You might be tempted to pursue a strategy like this:
+
+* Bind all the parameters into a single data structure (say an array), using a "varargs"-like mechanism.
+
+* Turn every `$N` into a bounds check, followed by a dereference or error.
+
+That would work. Of course, you would need to be able to write `$N` (like `$0`) as a stand-alone sigil in your language. In Racket, you can use identifier macros for this purpose. But that is messy: from a performance(!) perspective both function calls and variable references are now **much** more expensive; and managing scope becomes your problem (you shouldn't be able to write `$N` outside the syntactic body of one of these `lambda`s).
+
+This implementation uses a much simpler strategy. It instead turns, say, `(lambda 2 BODY)` into `(lambda ($0 $1) BODY)`. There is no need to construct a data structure or to dereference it. It just means that “out-of-bounds” accesses — e.g., `(lambda 1 $5)` — are reported just as unbound variables, rather than as special errors referring to the number of parameters. But in turn, you don't even have to do any extra work to get an error, and the resulting error message is sensible (as opposed to if you had forgotten to do a bounds-check, in which case you would be leaking the data structure used to capture the parameters).
+
+The key steps of this strategy are therefore:
+
+* Racket variable names can begin with `$`. We don't need to do any extra work to enable that.
+
+* So given `N`, the `lambda-n` macro just makes up the appropriate variable names and bind them as the (positional) parameters.
+
+* The names are manufactured by the `make-names` function in [`lambda-n.rkt`](lambda-n.rkt).
+
+* However, hygienic macros preclude these made-up names from actually capturing the same-named variables in the body. This is as it should be, usually.
+
+* But in this case, the entire purpose of making up those names *was* so that they could be used in the body.
+
+* Therefore, we have to override hygiene to capture the body variables. That is, we have to make it seem as if the manufactured names were written by the same entity that wrote the body. This is what the `datum->syntax` part does.
+
+And that's it! The heart of the implementation is the three-line function that generates the names and the two lines that embed them in the new function (offset by blank lines for readability).
+
 ## Is it *Ever* Useful?
 
 No, you should never use this! It's just meant to illustrate the power of Racket macros.
