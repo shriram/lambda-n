@@ -103,7 +103,7 @@ However, there are times, during debugging, when it's useful to have a placehold
 ## Best Alternate Names
 
 beka valentine on [Mastodon](https://mastodon.social/@beka_valentine@kolektiva.social/114748525078322647): 
-“bash.sh”
+“racket.sh”
 
 Vaishnavi S on [Bluesky](https://bsky.app/profile/vaishs.bsky.social/post/3lsiqgv2m7222):
 “Maybe you should call it John McEnroe, since you’re adding a little
